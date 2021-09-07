@@ -11,8 +11,10 @@ end
 
 -- Following vim manual
 map('n', 'Y', 'y$') -- reasonable nocompatible system
-map('i', '<C-U>', '<C-G>u<C-U>') -- for better undo
-map('i', '<C-W>', '<C-G>u<C-W>') -- for better undo
+map('i', '<C-H>', '<C-G>u<C-H>', {noremap = false}) -- for better undo
+map('i', '<C-W>', '<C-G>u<C-W>', {noremap = false}) -- for better undo
+map('i', '<C-U>', '<C-G>u<C-U>', {noremap = false}) -- for better undo
+map('i', '<CR>', '<C-]><C-G>u<CR>', {noremap = false}) -- for better undo
 
 --  Shell/EMACS style cursor moves
 map({'c', 't', 'i'}, '<C-F>', '<Right>')

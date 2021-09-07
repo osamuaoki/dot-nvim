@@ -21,7 +21,8 @@ require'packer'.startup({function(use)
   use {'dense-analysis/ale'}
   use {'junegunn/fzf'}
   use {'junegunn/fzf.vim'}
-  use {'nathanaelkane/vim-indent-guides'}
+  -- use {'glepnir/indent-guides.nvim'}
+  -- use {'lukas-reineke/indent-blankline.nvim'}
   use {'ntpeters/vim-better-whitespace'}
   use {'osamuaoki/vim-python-matchit'}
   use {'osamuaoki/vim-spell-under'}

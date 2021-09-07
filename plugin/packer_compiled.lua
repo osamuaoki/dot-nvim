@@ -101,10 +101,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/osamu/.local/share/nvim/site/pack/packer/start/vim-gitgutter"
   },
-  ["vim-indent-guides"] = {
-    loaded = true,
-    path = "/home/osamu/.local/share/nvim/site/pack/packer/start/vim-indent-guides"
-  },
   ["vim-python-matchit"] = {
     loaded = true,
     path = "/home/osamu/.local/share/nvim/site/pack/packer/start/vim-python-matchit"

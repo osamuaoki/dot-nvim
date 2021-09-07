@@ -7,6 +7,7 @@ local cmd = vim.cmd
 cmd [[
 filetype plugin indent on
 syntax enable
+colorscheme murphy
 ]]
 opt.tags:remove('./tags')
 opt.tags:remove('./tags;')
@@ -14,7 +15,7 @@ opt.tags:prepend('./tags;')
 
 opt.autoindent = true
 opt.autoread = true
-opt.backspace = 'indent','eol','start'
+opt.backspace = {'indent','eol','start'}
 opt.complete:remove('i')
 opt.cursorline = true            -- Neovim cursor is thin
 opt.display:append('lastline')
