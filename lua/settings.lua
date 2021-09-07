@@ -55,18 +55,6 @@ opt.softtabstop = 0
 opt.tabstop = 2
 opt.textwidth = 160
 
---    PASTE MODE toggle
---      Use ' p' in NORMAL MODE for paste mode toggle
-opt.pastetoggle = [[<leader>p]]
---   Offer original <C-F> function to start COMMAND NORMAL HISTORY MODE
---  Use <C-L> to clear the highlighting of :set hlsearch.
---  if maparg('<C-L>', 'n') ==# ''
---    nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
---  endif
---
---   from unused CTRL-O (mc like)
-opt.cedit = [[<C-O>]]
---  mini scripts (use vim's native feature)
 --  Use faster 'rg' for :grep
 if os.execute([[command -pV rg >/dev/null]]) then
   opt.grepprg = [[rg --no-heading --color=never --ignore-case --column]]
@@ -80,9 +68,6 @@ augroup vimcursor
 augroup END
 ]]
 
---  Leader/local leader
-g.mapleader = [[ ]]                   -- Use <SPACE>
-g.maplocalleader = [[,]]
 
 -- Package Settings
 g.spell_under = 'murphy'              -- set color

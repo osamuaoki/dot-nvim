@@ -26,7 +26,7 @@ if g.airline_symbols then
   g.airline_symbols.colnr = '' -- U+E0A3 is missing in hack font
 end
 
-o.timeoutlen=1500             -- mapping delay in ms, default 1000
+o.timeoutlen=800              -- mapping delay in ms, default 1000
 o.ttimeoutlen=10              -- keycode delay in ms, default 50
 
 if not g.loaded_better_whitespace_plugin then
