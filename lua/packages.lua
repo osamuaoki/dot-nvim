@@ -12,6 +12,7 @@ packadd! po
 packadd! gnupg
 ]]
 
+-- make sure to do ':PackerSync' once in a while
 
 require'packer'.startup({function(use)
   use{'wbthomason/packer.nvim'}
@@ -26,7 +27,6 @@ require'packer'.startup({function(use)
   use {'osamuaoki/vim-spell-under'}
   use {'romainl/vim-qlist'}
   use {'tpope/vim-repeat'}
-  use {'tpope/vim-sensible'}
   use {'vim-airline/vim-airline'}
   use {'vim-airline/vim-airline-themes'}
 end,
