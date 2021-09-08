@@ -62,18 +62,18 @@ map('x', '[I', [[<Plug>QlistDefinefromtopvisual]], {silent = true})
 
 -- LEADER (1 char)
 
---  Window moves (avoid typing dangerous CTRL-W)
-map({'n', 'v'}, '<leader>h', '<C-W>h')
-map({'n', 'v'}, '<leader>j', '<C-W>j')
-map({'n', 'v'}, '<leader>k', '<C-W>k')
-map({'n', 'v'}, '<leader>l', '<C-W>l')
-map({'n', 'v'}, '<leader>+', '<C-W>+') --            +
-map({'n', 'v'}, '<leader>=', '<C-W>+') -- lower case + on US
-map({'n', 'v'}, '<leader>-', '<C-W>-') --            -
-map({'n', 'v'}, '<leader>,', '<C-W>>') -- lower case <
-map({'n', 'v'}, '<leader>.', '<C-W><') -- lower case >
-map({'n', 'v'}, '<leader>>', '<C-W>>') --            <
-map({'n', 'v'}, '<leader><', '<C-W><') --            >
+--  Window moves by meta keys (avoid typing dangerous CTRL-W)
+map({'n', 'v'}, [[<M-h>]], [[<C-W>h]])
+map({'n', 'v'}, [[<M-j>]], [[<C-W>j]])
+map({'n', 'v'}, [[<M-k>]], [[<C-W>k]])
+map({'n', 'v'}, [[<M-l>]], [[<C-W>l]])
+map({'n', 'v'}, [[<M-=>]], [[<C-W>+]]) -- lower case + on US
+map({'n', 'v'}, [[<M-->]], [[<C-W>-]]) --            -
+map({'n', 'v'}, [[<M-,>]], [[<C-W>>]]) -- lower case <
+map({'n', 'v'}, [[<M-.>]], [[<C-W><]]) -- lower case >
+map({'n', 'v'}, [[<M-f>]], [[<C-W>r]])
+map({'n', 'v'}, [[<M-b>]], [[<C-W>R]])
+map({'n', 'v'}, [[<M-/>]], [[<C-W>=]]) -- since = is used use /
 
 --  Key Board MACRO with @q/@1/@2 and Q/<F2>/<F3>
 map('n', 'Q', '@q')
@@ -82,6 +82,7 @@ map('n', '<F2>', '@2')
 map('v', '<F2>', ':norm @2<cr>')
 map('n', '<F3>', '@3')
 map('v', '<F3>', ':norm @3<cr>')
+map('n', '<leader>=', 'gg=G') --  Reformat
 map('n', '<leader>z', 'zO') --  I can't remember all z-things, just a temporary relief
 -- map('n', '<leader>id', [[:unlet $TZ<CR>a<C-r>=strftime('%Y-%m-%d')<CR>]]) --   2021-09-08
 -- map('n', '<leader>is', [[:unlet $TZ<CR>a<C-r>=strftime('%Y-%m-%dT%H:%M:%S')<CR>]]) --  2021-09-08T12:08:40
