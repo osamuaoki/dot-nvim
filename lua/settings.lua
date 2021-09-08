@@ -48,6 +48,16 @@ opt.wildmenu = true
 opt.wildmode = 'longest,full'
 opt.wrap = false                 -- Don't wrap line (default=true)
 
+--  Put cursor back in place
+cmd [[
+augroup vimcursor
+  autocmd!
+  autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
+augroup END
+]]
+
+-- Preset parameters
+
 --  Text formatting (Tab, ...)
 opt.expandtab = true
 opt.shiftwidth = 2
@@ -61,36 +71,6 @@ if os.execute([[command -pV rg >/dev/null]]) then
   opt.grepformat = [[%f:%l:%c:%m,%f:%l:%m]]
 end
 
-cmd [[
-augroup vimcursor
-  autocmd!
-  autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
-augroup END
-]]
-
-
--- Package Settings
-g.spell_under = 'murphy'              -- set color
-g.better_whitespace_enabled=1         -- nicer than `:set list`
-g.better_whitespace_filetypes_blacklist={'diff'}    -- practically no blacklist
-g.strip_max_file_size=0               --  Disable
-g.strip_whitespace_on_save=0          --  Don't auto strip whitespace
-g.show_spaces_that_precede_tabs=1     --  highlight stray spaces
-g.strip_whitelines_at_eof=1           --  Enable stripping white lines at EOF
-g.indent_guides_enable_on_vim_startup = 1
-
-g.ale_enabled = false -- initially disable ALE.
-g.ale_lint_on_text_changed = 'never' -- No linters upon change
-g.ale_lint_on_enter = 1 -- No linters upon opening a file
-g.ale_lint_on_insert_leave = 1 -- No linters upon leaving INSERT
---g.ale_linters = {python = {1 = 'flake8'}}
-cmd [[ let g:ale_linters = {'python': ['flake8']}  ]] -- RED only, Use this, faster
---  cmd [[let g:ale_linters = {'python': ['flake8', 'pylint']}]]
---  cmd [[let g:ale_linters = {'python': ['pylint']}]] -- YELLOW (MANY)
---  cmd [[let g:ale_linters = {'python': ['mypy']}]]
-
-g.gitgutter_enabled = 0 --  initially disable gitgutter
-
 if os.getenv('TERM') == 'linux' then
   g.airline_powerline_fonts = 0
   g.airline_symbols_ascii = 1
@@ -98,6 +78,6 @@ else
   g.airline_powerline_fonts = 1
 end
 
-g['airline#parts#ffenc#skip_expected_string'] = 'utf-8[unix]'
+
 
 -- vim: set sw=2 sts=2 et ft=lua :

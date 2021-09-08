@@ -2,14 +2,6 @@ local o = vim.o
 local g = vim.g
 local fn = vim.fn
 local cmd = vim.cmd
-local map_key = vim.api.nvim_set_keymap
-local function map(modes, lhs, rhs, opts)
-  opts = opts or {}
-  -- noremap as default
-  opts.noremap = opts.noremap == nil and true or opts.noremap
-  if type(modes) == 'string' then modes = {modes} end
-  for _, mode in ipairs(modes) do map_key(mode, lhs, rhs, opts) end
-end
 -- Settings
 
 --  Text formatting (Tab, ...)
@@ -22,6 +14,31 @@ if override_width > 0 then
   o.expandtab = true
 end
 
+-- Package Settings overrides
+
+g.spell_under = 'murphy'              -- set color
+g.better_whitespace_enabled=1         -- nicer than `:set list`
+g.better_whitespace_filetypes_blacklist={'diff'}    -- practically no blacklist
+g.strip_max_file_size=0               --  Disable
+g.strip_whitespace_on_save=0          --  Don't auto strip whitespace
+g.show_spaces_that_precede_tabs=1     --  highlight stray spaces
+g.strip_whitelines_at_eof=1           --  Enable stripping white lines at EOF
+g.indent_guides_enable_on_vim_startup = 1
+
+g.ale_enabled = false -- initially disable ALE.
+g.ale_lint_on_text_changed = 'never' -- No linters upon change
+g.ale_lint_on_enter = 1 -- No linters upon opening a file
+g.ale_lint_on_insert_leave = 1 -- No linters upon leaving INSERT
+--g.ale_linters = {python = {1 = 'flake8'}}
+cmd [[ let g:ale_linters = {'python': ['flake8']}  ]] -- RED only, Use this, faster
+--  cmd [[let g:ale_linters = {'python': ['flake8', 'pylint']}]]
+--  cmd [[let g:ale_linters = {'python': ['pylint']}]] -- YELLOW (MANY)
+--  cmd [[let g:ale_linters = {'python': ['mypy']}]]
+
+g.gitgutter_enabled = 0 --  initially disable gitgutter
+
+
+g['airline#parts#ffenc#skip_expected_string'] = 'utf-8[unix]'
 if g.airline_symbols then
   g.airline_symbols.colnr = '' -- U+E0A3 is missing in hack font
 end

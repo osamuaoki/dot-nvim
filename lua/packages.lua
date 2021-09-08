@@ -28,6 +28,7 @@ require'packer'.startup({function(use)
   use {'osamuaoki/vim-spell-under'}
   use {'romainl/vim-qlist'}
   use {'tpope/vim-repeat'}
+  use {'nvim-treesitter/nvim-treesitter'}
   use {'vim-airline/vim-airline'}
   use {'vim-airline/vim-airline-themes'}
 end,

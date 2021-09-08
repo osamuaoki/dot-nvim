@@ -14,7 +14,6 @@ end
 g.mapleader = [[ ]]                   -- Use <SPACE>
 g.maplocalleader = [[,]]
 
-
 --  mini scripts (use vim's native feature)
 --  Following vim manual
 map('n', 'Y', 'y$') -- reasonable in line with D == d$
@@ -27,27 +26,26 @@ map('i', '<CR>', '<C-]><C-G>u<CR>') -- for better undo
 
 --  Shell (EMACS) style cursor moves
 map({'c', 't', 'i'}, '<C-F>', '<Right>')
+opt.cedit = [[<C-O>]] -- for COMMAND MODE
 map({'c', 't', 'i'}, '<C-B>', '<Left>')
-map('c', '<C-@>', '<C-D>') -- for now, safety backup access
+map('c', '<C-@>', '<C-D>') -- original-<C-D> indent access
 map({'c', 't', 'i'}, '<C-D>', '<Del>')
-map('c', '<C-_>', '<C-A>')
+map('c', '<C-_>', '<C-A>') -- insert all access
 map({'c', 't'}, '<C-A>', '<Home>')
-map('t', '<C-E>', '<End>')
-map('t', '<C-P>', '<Up>')
-map('t', '<C-N>', '<Down>')
+-- map({'c', 't'}, '<C-E>', '<End>') -- already so
 -- INSERT MODE idiosyncrasies -- at least, move with 2-keys within line
---   ^F or ^B were unbound (use them)
---   ^D were bound to adjust indent (useless, autoindent+NORMAL)
---   HOME can be <Esc>I, END can be <Esc>A
+--     <C-F> or <C-B> were unbound (use them)
+--     <C-D> were bound to adjust indent (useless, autoindent+NORMAL)
+--     HOME can be <Esc>I, END can be <Esc>A
 -- COMMAND MODE idiosyncrasies -- more like shell
---   ^F was bound to <cedit> (now by <C-O>)
-opt.cedit = [[<C-O>]]
---   ^B was bound to begin of command-line (now by <C-A>)
---   ^D was bound to list completions (useless, use <space>)
---   ^A was bound to list completions (insert all) (use <C-_>)
---   ^E was bound to cursor to end of command-line (no change)
---   ^P is bound to wildchar-match (no change)
---   ^N is bound to wildchar-match (no change)
+--     <C-F> was bound to <cedit> (now by <C-O>)
+--     <C-B> was bound to begin of command-line (now by <C-A>)
+--     <C-D> was bound to list completions (useless, use <space>)
+--     <C-A> was bound to list completions (insert all) (use <C-_>)
+--     <C-E> was bound to cursor to end of command-line (no change)
+--  TERMINAL MODE
+--     <C-N> is used as a part of  <C-\><C-N> and get remapped somehow
+--     <C-P> is skipped for mapping to match unmapped <C-N>
 
 --  NORMAL MODE
 map('n', '[I', [[<Plug>QlistIncludefromtop]], {silent = true})
@@ -97,72 +95,61 @@ map('v', '<leader>r', [[:s%<C-r>/%<C-r>"%gc<Left><Left><Left>]])
 map({'n', 'v'}, '<C-L>', [[:nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>]], {silent = true}) --  no highlight and refresh screen
 
 map({'n', 'v'}, '<leader><CR>', [[:term<CR>i]]) --  NORMAL -> TERM: open terminal on current window (and on prompt)
---  This avoids crashing fzf menu running in terminal with escape
+--  This <Esc><Esc> is easier to type than <C-\><C-N>
+--       ... wait for more than a second between <Esc>s to send <Esc>s
+map('t', [[<Esc><Esc>]], [[<C-\><C-N>]])
+--  This <Esc><Esc> avoids crashing fzf menu running in TERMINAL MODE (:q if you do)
 --    https://github.com/junegunn/fzf.vim/issues/544
 --    https://vi.stackexchange.com/questions/2614/why-does-this-esc-normal-mode-mapping-affect-startup
 --    https://vi.stackexchange.com/questions/24925/usage-of-timeoutlen-and-ttimeoutlen
-cmd [[
-fun! RemapTerminalEsc()
-if &ft =~ 'fzf'
-  silent! tunmap <buffer> <Esc><Esc>
-else
-  " If <Esc> is typed slowly, it can skip this.  (compromise)
-  silent! tnoremap <buffer> <Esc><Esc> <c-\><c-n>
-  endif
-  endfun
-  augroup vimrc
-  autocmd!
-  autocmd BufEnter * silent! call RemapTerminalEsc()
-  augroup END
-  ]]
 
-  opt.pastetoggle = [[<leader>p]] --    PASTE MODE toggle
-  map('n', '<leader>w', [[:WMToggle<CR>]]) --  WinManager: toggle
-  map('n', '<leader>b', [[:ToggleBufExplorer<CR>]]) --  BufExplorer:  toggle
-  map('n', '<leader>e', [[:StripWhitespace<CR>]]) --  StripSpaces at EOL
-  -- Vim TABs
-  map('n', '<leader>1', '1gt<CR>')
-  map('n', '<leader>2', '2gt<CR>')
-  map('n', '<leader>3', '3gt<CR>')
-  map('n', '<leader>4', '4gt<CR>')
-  map('n', '<leader>5', '5gt<CR>')
-  map('n', '<leader>6', '6gt<CR>')
-  map('n', '<leader>7', '7gt<CR>')
-  map('n', '<leader>8', '8gt<CR>')
-  map('n', '<leader>9', '9gt<CR>')
-  map('n', '<leader>1', '1gt<CR>')
+opt.pastetoggle = [[<leader>p]] --    PASTE MODE toggle
+map('n', '<leader>w', [[:WMToggle<CR>]]) --  WinManager: toggle
+map('n', '<leader>b', [[:ToggleBufExplorer<CR>]]) --  BufExplorer:  toggle
+map('n', '<leader>e', [[:StripWhitespace<CR>]]) --  StripSpaces at EOL
+-- Vim TABs
+map('n', '<leader>1', '1gt<CR>')
+map('n', '<leader>2', '2gt<CR>')
+map('n', '<leader>3', '3gt<CR>')
+map('n', '<leader>4', '4gt<CR>')
+map('n', '<leader>5', '5gt<CR>')
+map('n', '<leader>6', '6gt<CR>')
+map('n', '<leader>7', '7gt<CR>')
+map('n', '<leader>8', '8gt<CR>')
+map('n', '<leader>9', '9gt<CR>')
+map('n', '<leader>1', '1gt<CR>')
 
-  --  Rotate spell/syntax mode (default)
-  map('n', '<leader>s',  [[<Plug>RotateSpellSyntax]], {noremap = false})
-  --  ALE: toggle _ALE activity
-  map('n', '<leader>a',[[:ALEToggle<CR>]])
+--  Rotate spell/syntax mode (default)
+map('n', '<leader>s',  [[<Plug>RotateSpellSyntax]], {noremap = false})
+--  ALE: toggle _ALE activity
+map('n', '<leader>a',[[:ALEToggle<CR>]])
 
-  --- LEADER: 2 chars
+--- LEADER: 2 chars
 
-  --  GitGutter:
-  map('n', '<leader>gg',[[:GitGutterToggle<CR>]])
-  map('n', '<leader>gp',[[:GitGutterPreviewHunk<CR>]])
-  -- move to the preview window, e.g. :wincmd P / <C-W> P
-  map('n', '<leader>gs',[[:GitGutterStageHunk<CR>]])
-  map('n', '<leader>gu',[[:GitGutterUndoHunk<CR>]])
+--  GitGutter:
+map('n', '<leader>gg',[[:GitGutterToggle<CR>]])
+map('n', '<leader>gp',[[:GitGutterPreviewHunk<CR>]])
+-- move to the preview window, e.g. :wincmd P / <C-W> P
+map('n', '<leader>gs',[[:GitGutterStageHunk<CR>]])
+map('n', '<leader>gu',[[:GitGutterUndoHunk<CR>]])
 
-  --  Fzf: CTRL-T:openTAB, CTRL-X:split-H, CTRL-V:split-V
-  map('n', '<leader>fb', ':Buffers<CR>')
-  map('n', '<leader>fc', ':Colors<CR>')
-  map('n', '<leader>ff', ':Files<CR>')
-  map('n', '<leader>gl', ':GFiles<CR>')
-  map('n', '<leader>gs', ':GFiles?<CR>')
-  map('n', '<leader>fm', ':Maps<CR>')
-  map('n', '<leader>fr', ':Rg<CR>')
-  map('n', '<leader>ft', ':Tags<CR>')
-  map('n', '<leader>fT', ':Filetypes<CR>')
-  map('n', '<leader>fv', ':History<CR>')
-  map('n', '<leader>fx', ':Commands<CR>')
-  map('n', '<leader>f/', ':History/<CR>')
-  map('n', '<leader>f:', ':History:<CR>')
-  map('n', '<leader>fh', ':Helptags<CR>')
-  map('n', '<leader>fM', ':Marks<CR>')
-  map('n', '<leader>fw', ':Windows<CR>')
-  --map('n', '<leader>fB', ':Btags<CR>')
+--  Fzf: CTRL-T:openTAB, CTRL-X:split-H, CTRL-V:split-V
+map('n', '<leader>fb', ':Buffers<CR>')
+map('n', '<leader>fc', ':Colors<CR>')
+map('n', '<leader>ff', ':Files<CR>')
+map('n', '<leader>gl', ':GFiles<CR>')
+map('n', '<leader>gs', ':GFiles?<CR>')
+map('n', '<leader>fm', ':Maps<CR>')
+map('n', '<leader>fr', ':Rg<CR>')
+map('n', '<leader>ft', ':Tags<CR>')
+map('n', '<leader>fT', ':Filetypes<CR>')
+map('n', '<leader>fv', ':History<CR>')
+map('n', '<leader>fx', ':Commands<CR>')
+map('n', '<leader>f/', ':History/<CR>')
+map('n', '<leader>f:', ':History:<CR>')
+map('n', '<leader>fh', ':Helptags<CR>')
+map('n', '<leader>fM', ':Marks<CR>')
+map('n', '<leader>fw', ':Windows<CR>')
+--map('n', '<leader>fB', ':Btags<CR>')
 
-  -- vim: set sw=2 sts=2 et ft=lua :
+-- vim: set sw=2 sts=2 et ft=lua :
