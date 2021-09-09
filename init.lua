@@ -27,6 +27,19 @@ project_data = xdg_data_home .. '/' .. project_name
 --  print("I: PROJECT_CONFIG     = " .. project_config )
 --  print("I: PROJECT_DATA       = " .. project_data )
 
+local opt = vim.opt
+opt.rtp:remove(xdg_data_home .. "/nvim/site")
+opt.rtp:remove(xdg_data_home .. "/nvim/site/after")
+opt.rtp:prepend(project_data .. "/site")
+opt.rtp:append(project_data .. "/site/after")
+
+opt.rtp:remove(xdg_config_home .. "/nvim")
+opt.rtp:remove(xdg_config_home .. "/nvim/after")
+opt.rtp:prepend(project_config)
+opt.rtp:append(project_config .. "/after")
+
+vim.cmd [[let &packpath = &runtimepath]]
+
 require'packages'
 require'settings'
 require'mappings'
