@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# git clone this configuration repo to $XDG_CONFIG_HOME/${PROJECT_NAME}/
+
+# Then, copy this file to a directory in $PATH such as $HOME/.local/bin or $HOME/bin
+
+PROJECT_BIN="nvim"              # flexibility for binary executable
+PROJECT_NAME="nvim-osamu"       # flexibility for configuration data
+# $XDG_CONFIG_HOME      $HOME/.config           directory for configurations
+
+HOME=~
+XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+exec "${PROJECT_BIN}" -u "${XDG_CONFIG_HOME}/${PROJECT_NAME}/init.lua" "$@"

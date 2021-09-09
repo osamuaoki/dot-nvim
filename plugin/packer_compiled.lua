@@ -81,6 +81,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/osamu/.local/share/nvim/site/pack/packer/start/fzf.vim"
   },
+  ["nvim-luadev"] = {
+    loaded = true,
+    path = "/home/osamu/.local/share/nvim/site/pack/packer/start/nvim-luadev"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/home/osamu/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
