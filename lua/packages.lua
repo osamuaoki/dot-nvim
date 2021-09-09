@@ -19,6 +19,7 @@ require'packer'.startup({function(use)
   -- Also run code after load (see the "config" key)
   use {'airblade/vim-gitgutter'}
   use {'dense-analysis/ale'}
+  use {'bfredl/nvim-luadev'}
   use {'junegunn/fzf'}
   use {'junegunn/fzf.vim'}
   -- use {'glepnir/indent-guides.nvim'}
