@@ -2,7 +2,14 @@
 
 This is a copy of my `~/.config/nvim` targeting for neovim 0.5 with lua.
 
-It's rather new.
+Basically, this does pretty much the same thing as my old dot-vim setup
+in vimL.
+
+I see benefit of lua as easy to use language over 
+[My older .vim for Vim 8.0](https://github.com/osamuaoki/dot-vim).
+But resulting code performs faster but not so much faster.  I see needs
+to do things differently.  For that, I decided to build on others.  That
+is [NvChad](https://github.com/NvChad/NvChad) at this moment.
 
 ## Key features
 
@@ -23,8 +30,10 @@ vim seting:
 * [Re-learning Vim (1)](https://osamuaoki.github.io/en/2019/09/17/vim-learn-1/)
 * [Re-learning Vim (2)](https://osamuaoki.github.io/en/2019/09/24/vim-learn-2/)
 * [My older .vim for Vim 8.0](https://github.com/osamuaoki/dot-vim)
+* [My modified NvChad for nvim(0.5+)](https://github.com/osamuaoki/NvChad)
 
-Currently, `vi` starts `nvim` and `vim` starts `vim`.
+I have a startup script in ~/.local/bin/ which switches what
+configuration are used.
 
 ## Quick start
 
