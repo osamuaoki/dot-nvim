@@ -13,6 +13,8 @@ end
 --  Leader/local leader
 g.mapleader = [[ ]]                   -- Use <SPACE>
 g.maplocalleader = [[,]]
+g.cedit = [[<C-O>]] -- for COMMAND MODE
+--opt.cedit = [[<C-O>]] -- for COMMAND MODE
 
 --  mini scripts (use vim's native feature)
 --  Following vim manual
@@ -26,7 +28,6 @@ map('i', '<CR>', '<C-]><C-G>u<CR>') -- for better undo
 
 --  Shell (EMACS) style cursor moves
 map({'c', 't', 'i'}, '<C-F>', '<Right>')
-opt.cedit = [[<C-O>]] -- for COMMAND MODE
 map({'c', 't', 'i'}, '<C-B>', '<Left>')
 map('c', '<C-@>', '<C-D>') -- original-<C-D> indent access
 map({'c', 't', 'i'}, '<C-D>', '<Del>')
